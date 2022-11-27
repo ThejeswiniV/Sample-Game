@@ -5,7 +5,12 @@ metadata:
     name: backend-service
   name: backend-service
 spec:
+  type: LoadBalancer
   ports:
-  - port: 8081
+  - name: http
+    port: 8081
+    targetPort: 8080
+    protocol: TCP
   selector:
-    name: backend-node
+    name: backend-service
+    role: frontend
