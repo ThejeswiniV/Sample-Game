@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: $APP_NAME
+      role: frontend
+      env: canary
+  replicas: 3
+  template:
+    metadata:
+      name: frontend
+      labels:
+        app: $APP_NAME
+        role: frontend
+        env: canary
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/<PROJECT_ID>/canary:v1.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        ports:
+        - name: frontend
+          value: "8080"
+        env:
+          - name: PORT
+            value: "8080"
