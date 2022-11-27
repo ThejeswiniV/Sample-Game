@@ -1,14 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  name: frontend-node
   labels:
     name: frontend-node
 spec:
-   selector:
-    matchLabels:
-      app: $APP_NAME
-      role: frontend
-      env: config
+  selector:
+   matchLabels:
+    app: $APP_NAME
+    role: frontend
+    env: config
   replicas: 3
   template:
     metadata:
