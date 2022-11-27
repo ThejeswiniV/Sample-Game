@@ -8,12 +8,17 @@ spec:
   replicas: 3
   template:
     metadata:
+      name: backend-node
       labels:
-        name: backend-node
+        labels:
+        app: $APP_NAME
+        role: frontend
+        env: config    
     spec:
       containers:
       - image: gcr.io/<PROJECT ID>/backend:v1.0
         name: backend-node
         ports:
-        - containerPort: 8081
+        - name: PORT
+          value: "8081"
 
