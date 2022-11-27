@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: $APP_NAME
       role: frontend
-      env: frontend-dev
+      env: config
   replicas: 3
   template:
     metadata:
@@ -16,7 +16,7 @@ spec:
       labels:
         app: $APP_NAME
         role: frontend
-        env: frontend-dev
+        env: config
     spec:
       containers:
       - name: frontend
