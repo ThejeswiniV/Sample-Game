@@ -3,17 +3,29 @@ kind: Deployment
 metadata:
   labels:
     name: frontend-node
-  name: frontend-node
 spec:
+   selector:
+    matchLabels:
+      app: $APP_NAME
+      role: frontend
+      env: frontend-dev
   replicas: 3
   template:
     metadata:
+      name: frontend-node
       labels:
-        name: frontend-node
+        app: $APP_NAME
+        role: frontend
+        env: frontend-dev
     spec:
       containers:
-      - image: gcr.io/<PROJECT ID>/frontend:v1.0
-        name: frontend-node
+      - name: frontend
+        image: gcr.io/<PROJECT ID>/frontend:v1.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
         ports:
-        - containerPort: 8080
-
+        - name: PORT
+          value: "8080"
